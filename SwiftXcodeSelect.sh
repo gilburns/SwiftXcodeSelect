@@ -3,6 +3,9 @@
 # Save IFS
 OLDIFS=$IFS
 
+VERSION="1.0"
+VERSIONDATE="2023-01-01"
+
 LOG_FOLDER="/private/var/log"
 LOG_NAME="Xcode-Select.log"
 JAMF_BINARY="/usr/local/bin/jamf"
