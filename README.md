@@ -21,7 +21,9 @@ Inspiration for this tool comes from this [blog](https://smithjw.me/2022/05/20/I
 
 The latest version can be found on the [Releases](https://github.com/gilburns/SwiftXcodeSelect/releases) page
 
+<!-- 
 Detailed documentation and information can be found in the [Wiki](https://github.com/gilburns/SwiftXcodeSelect/wiki)
+ -->
 
 SwiftXcodeSelect does require and utilize **swiftDialog** for all the notification dialogs. Please visit this page for more details: [Releases](https://github.com/bartreardon/Dialog/releases)
 
