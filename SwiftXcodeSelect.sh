@@ -110,6 +110,7 @@ RESPONSE_CODE=$?
 if [ ${RESPONSE_CODE} -eq 0 ]; then
 	# Get path value of the response
 	MY_RESPONSE=$(echo "${MY_RESPONSE}" | grep "SelectedOption" | awk -F ": " '{print $NF}')
+	MY_RESPONSE="$(echo "$MY_RESPONSE" | tr -d '"')"
 	echo_logger "Selection made: ${MY_RESPONSE}"
 	echo_logger " "
 	# Check to see if the path changed or not
