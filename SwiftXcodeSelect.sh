@@ -131,7 +131,7 @@ if [ ${RESPONSE_CODE} -eq 0 ]; then
         echo_logger "No changes"
         RESULT_TITLE="No Change"
         RESULT_MESSAGE="Xcode tools unchanged."
-    fi    
+    fi
 elif [ ${RESPONSE_CODE} -eq 2 ]; then
     echo_logger "User canceled the dialog"
     echo_logger "No changes"
