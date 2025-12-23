@@ -34,7 +34,7 @@ echo_logger "-------------------------------"
 #
 XC_CURRENT_PATH=$(/usr/bin/xcode-select -p)
 if [[ "${XC_CURRENT_PATH}" == *"/Contents/Developer"* ]]; then
-	XC_CURRENT_PATH=${XC_CURRENT_PATH%"/Contents/Developer"}
+    XC_CURRENT_PATH=${XC_CURRENT_PATH%"/Contents/Developer"}
 fi
 echo_logger "Current Path: ${XC_CURRENT_PATH}"
 echo_logger " "
@@ -60,7 +60,7 @@ XC_CLT_DIR="/Library/Developer/CommandLineTools"
 
 # If it exists add to the array
 if [ -d "${XC_CLT_DIR}" ]; then
-	XC_APP_ARRAY+=("${XC_CLT_DIR}")
+    XC_APP_ARRAY+=("${XC_CLT_DIR}")
 fi
 
 # Check if the array holds the currently set path
@@ -76,7 +76,7 @@ DIALOG_CMD=(
     "--title \"${DIALOG_INITIAL_TITLE}\""
     "--titlefont \"weight=bold,size=20\""
     "--icon \"${DIALOG_ICON}\""
-	"--overlayicon \"${OVERLAY_ICON}\""
+    "--overlayicon \"${OVERLAY_ICON}\""
     "--position center"
     "--message \"**View or change the path to the active developer directory.**\n\nThis directory controls which tools are used for the Xcode command line tools (for example, xcodebuild) as well as the BSD development commands (such as cc and make).
 \""
@@ -84,13 +84,13 @@ DIALOG_CMD=(
     "--small"
     "--ontop"
     "--moveable"
-	"--button1text \"Set Path…\""
-	"--button2"
-	"--selecttitle \"Xcode Default Tools:\""
-	"--selectvalues \"${XC_APP_ARRAY_JOINED%,}\""
-	"--selectdefault ${XC_CURRENT_PATH}"
-	"--timer ${DIALOG_TIMEOUT}"
-	"--hidetimerbar"
+    "--button1text \"Set Path…\""
+    "--button2"
+    "--selecttitle \"Xcode Default Tools:\""
+    "--selectvalues \"${XC_APP_ARRAY_JOINED%,}\""
+    "--selectdefault ${XC_CURRENT_PATH}"
+    "--timer ${DIALOG_TIMEOUT}"
+    "--hidetimerbar"
 )
 
 if [ ! -f "${DIALOG_APP}" ]; then
@@ -108,40 +108,40 @@ RESPONSE_CODE=$?
 
 # Check to see which response was returned
 if [ ${RESPONSE_CODE} -eq 0 ]; then
-	# Get path value of the response
-	MY_RESPONSE=$(echo "${MY_RESPONSE}" | grep "SelectedOption" | awk -F ": " '{print $NF}')
-	MY_RESPONSE="$(echo "$MY_RESPONSE" | tr -d '"')"
-	echo_logger "Selection made: ${MY_RESPONSE}"
-	echo_logger " "
-	# Check to see if the path changed or not
-	if [[ "${MY_RESPONSE}" != "${XC_CURRENT_PATH}" ]];then
-		/usr/bin/xcode-select --switch ${MY_RESPONSE} 2>/dev/null
-		PATH_ACTION=$?
-		if [ ${PATH_ACTION} -eq 0 ]; then
-			echo_logger "Successfully changed default Xcode path"
-			RESULT_TITLE="Change Successful!"
-			RESULT_MESSAGE="The Xcode tool changed to:\n\n ${MY_RESPONSE}"
-		else
-			echo_logger "Something went wrong changing Xcode path"			
-			RESULT_TITLE="Change Failed!"
-			RESULT_MESSAGE="Xcode tools unchanged. Try again or contact IT.\n\n ${XC_CURRENT_PATH}"
-		fi
-	else
-		echo_logger "Selection same as current"
-		echo_logger "No changes"
-		RESULT_TITLE="No Change"
-		RESULT_MESSAGE="Xcode tools unchanged."
-	fi	
+    # Get path value of the response
+    MY_RESPONSE=$(echo "${MY_RESPONSE}" | grep "SelectedOption" | awk -F ": " '{print $NF}')
+    MY_RESPONSE="$(echo "$MY_RESPONSE" | tr -d '"')"
+    echo_logger "Selection made: ${MY_RESPONSE}"
+    echo_logger " "
+    # Check to see if the path changed or not
+    if [[ "${MY_RESPONSE}" != "${XC_CURRENT_PATH}" ]];then
+        /usr/bin/xcode-select --switch ${MY_RESPONSE} 2>/dev/null
+        PATH_ACTION=$?
+        if [ ${PATH_ACTION} -eq 0 ]; then
+            echo_logger "Successfully changed default Xcode path"
+            RESULT_TITLE="Change Successful!"
+            RESULT_MESSAGE="The Xcode tool changed to:\n\n ${MY_RESPONSE}"
+        else
+            echo_logger "Something went wrong changing Xcode path"            
+            RESULT_TITLE="Change Failed!"
+            RESULT_MESSAGE="Xcode tools unchanged. Try again or contact IT.\n\n ${XC_CURRENT_PATH}"
+        fi
+    else
+        echo_logger "Selection same as current"
+        echo_logger "No changes"
+        RESULT_TITLE="No Change"
+        RESULT_MESSAGE="Xcode tools unchanged."
+    fi    
 elif [ ${RESPONSE_CODE} -eq 2 ]; then
-	echo_logger "User canceled the dialog"
-	echo_logger "No changes"
-	RESULT_TITLE="No Change"
-	RESULT_MESSAGE="Selection dialog canceled."
+    echo_logger "User canceled the dialog"
+    echo_logger "No changes"
+    RESULT_TITLE="No Change"
+    RESULT_MESSAGE="Selection dialog canceled."
 elif [ ${RESPONSE_CODE} -eq 4 ]; then
-	echo_logger "Dialog timed out after ${DIALOG_TIMEOUT} seconds"
-	echo_logger "No response from user"
-	RESULT_TITLE="No Change"
-	RESULT_MESSAGE="Selection dialog timed out."
+    echo_logger "Dialog timed out after ${DIALOG_TIMEOUT} seconds"
+    echo_logger "No response from user"
+    RESULT_TITLE="No Change"
+    RESULT_MESSAGE="Selection dialog timed out."
 fi
 
 # Display final results to user
@@ -149,14 +149,14 @@ DIALOG_CMD=(
     "--title \"${RESULT_TITLE}\""
     "--titlefont \"weight=bold,size=20\""
     "--icon \"${DIALOG_ICON}\""
-	"--overlayicon \"${OVERLAY_ICON}\""
+    "--overlayicon \"${OVERLAY_ICON}\""
     "--position center"
     "--message \"${RESULT_MESSAGE}\""
     "--messagefont \"weight=regular,size=16\""
     "--mini"
     "--ontop"
     "--moveable"
-	"--button1"
+    "--button1"
 )
 
 eval "${DIALOG_APP}" "${DIALOG_CMD[*]}" &
