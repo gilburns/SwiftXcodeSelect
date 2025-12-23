@@ -3,8 +3,8 @@
 # Save IFS
 OLDIFS=$IFS
 
-VERSION="1.0"
-VERSIONDATE="2023-01-01"
+VERSION="1.01"
+VERSIONDATE="2025-12-22"
 
 LOG_FOLDER="/private/var/log"
 LOG_NAME="Xcode-Select.log"
